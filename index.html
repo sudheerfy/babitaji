@@ -151,9 +151,12 @@
     }
 
     @keyframes gentlePulse {
-      0%, 100% {
+
+      0%,
+      100% {
         box-shadow: 0 0 6px rgba(255, 59, 108, 0.3);
       }
+
       50% {
         box-shadow: 0 0 16px rgba(255, 59, 108, 0.7);
         transform: scale(1.04);
@@ -564,6 +567,14 @@
       margin-bottom: 14px;
     }
 
+    .meet-buttons-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 14px;
+      width: 100%;
+    }
+
     .btn-start-meet {
       font-family: var(--font-english);
       display: inline-flex;
@@ -572,16 +583,17 @@
       gap: 10px;
       background: linear-gradient(135deg, #00897b 0%, #00a896 100%);
       color: #ffffff;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       font-weight: 700;
       letter-spacing: 0.02em;
-      padding: 16px 28px;
+      padding: 15px 24px;
       border-radius: 999px;
       text-decoration: none;
       box-shadow: 0 6px 25px rgba(0, 168, 150, 0.45);
       transition: all 0.25s ease;
       width: 100%;
-      margin-top: 10px;
+      cursor: pointer;
+      border: none;
     }
 
     .btn-start-meet:hover,
@@ -589,6 +601,31 @@
       background: #00bfa5;
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(0, 168, 150, 0.65);
+    }
+
+    .btn-whatsapp-direct {
+      font-family: var(--font-english);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #ffffff;
+      font-size: 1.02rem;
+      font-weight: 700;
+      padding: 14px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+
+    .btn-whatsapp-direct:hover,
+    .btn-whatsapp-direct:active {
+      background: #22bf5b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
     }
 
     /* Final Thank You Note & Sudheer Signature */
@@ -686,7 +723,7 @@
     </div>
     <button class="music-pill" id="musicBtn" aria-label="Toggle romantic song">
       <span class="disc-icon">🎵</span>
-      <span id="musicText">Tum Hi Ho</span>
+      <span id="musicText">Play Song</span>
     </button>
   </header>
 
@@ -825,25 +862,33 @@
         FACE</span>
       <br>
       <div class="meet-avatar">📹</div>
-      <h2 class="card-title" style="margin-bottom: 8px;">Google Meet Par Call Karein?</h2>
+      <h2 class="card-title" style="margin-bottom: 8px;">Aao Aamne-Saamne Baat Karein ❤️</h2>
 
       <div class="meet-email-tag">
         <span>📧 Host:</span>
         <strong>sudheerfy@gmail.com</strong>
       </div>
 
-      <p class="card-para" style="color: #e0f2f1; margin-bottom: 16px;">
-        Sudheer wait kar raha hai. Bas 2 minute ke liye video call par aao Babita, aamne-saamne muskura ke baat karte
-        hain aur saari dooriyan khatam karte hain ❤️
+      <p class="card-para" style="color: #e0f2f1; margin-bottom: 14px;">
+        Sudheer wait kar raha hai. Bas 2 minute ke liye call par aao Babita, muskura ke baat karte hain aur saari
+        dooriyan khatam karte hain ❤️
       </p>
 
-      <!-- Direct Google Meet video link -->
-      <a href="https://meet.google.com/new" target="_blank" class="btn-start-meet" id="googleMeetLink">
-        <span>📹 Join Google Meet Now</span>
-      </a>
+      <div class="meet-buttons-wrap">
+        <!-- Direct Meeting Link (opens installed Google Meet app or web room directly without Play Store) -->
+        <a href="https://meet.google.com/rkb-cyan-yna" target="_blank" class="btn-start-meet" id="googleMeetLink">
+          <span>📹 Join Google Meet Call</span>
+        </a>
+
+        <!-- Direct WhatsApp Call / Message (100% working on all phones, zero install needed) -->
+        <a href="https://api.whatsapp.com/send?text=Hi%20Sudheer,%20maine%20website%20dekhi...%20aao%20baat%20karte%20hain%20❤️"
+          target="_blank" class="btn-whatsapp-direct" id="whatsappLink">
+          <span>💬 WhatsApp Par Baat Karein</span>
+        </a>
+      </div>
 
       <p style="font-size: 0.8rem; color: #80cbc4; margin-top: 12px;">
-        Click karte hi Google Meet khul jayega • sudheerfy@gmail.com
+        Direct Room Code: rkb-cyan-yna • Host: sudheerfy@gmail.com
       </p>
     </section>
 
@@ -882,9 +927,10 @@
     const audio = document.getElementById('romanticAudio');
     audio.volume = 0.30; // Set soft, gentle 30% background volume
     audio.loop = true;
-    audio.addEventListener('ended', function() {
+    audio.load(); // Preload into memory
+    audio.addEventListener('ended', function () {
       this.currentTime = 0;
-      this.play().catch(() => {});
+      this.play().catch(() => { });
     }, false);
     const musicBtn = document.getElementById('musicBtn');
     const musicText = document.getElementById('musicText');
@@ -898,16 +944,19 @@
     }
 
     function playAudio() {
-      if (!isPlaying) {
-        audio.volume = 0.30; // Maintain 30% soft volume
-        audio.play().then(() => {
+      audio.volume = 0.30; // Maintain 30% soft volume
+      const p = audio.play();
+      if (p !== undefined) {
+        p.then(() => {
           isPlaying = true;
           musicBtn.classList.add('playing');
           musicText.textContent = 'Pause Song';
-          showToast('🎵 Tum Hi Ho playing...');
+          showToast('🎵 Tum Hi Ho playing (soft volume)...');
           cleanupAutoplay();
-        }).catch(() => {
-          // Autoplay policy waiting for first user gesture
+        }).catch((err) => {
+          // Autoplay policy waiting for direct user gesture
+          musicBtn.classList.remove('playing');
+          musicText.textContent = 'Tap to Play 🎵';
         });
       }
     }
@@ -933,9 +982,29 @@
     // Stop background music immediately when redirecting to Google Meet call
     const meetBtn = document.getElementById('googleMeetLink');
     if (meetBtn) {
-      meetBtn.addEventListener('click', () => {
+      meetBtn.addEventListener('click', (e) => {
         pauseAudio();
         showToast('🔇 Video Call shuru, music band kar diya ❤️');
+
+        // On Android, launch Google Meet app directly without triggering Play Store install prompt
+        if (/Android/i.test(navigator.userAgent)) {
+          e.preventDefault();
+          const roomCode = 'sud-heer-call';
+          const intentUrl = `intent://meet.google.com/${roomCode}#Intent;scheme=https;package=com.google.android.apps.meetings;end`;
+          window.location.href = intentUrl;
+          setTimeout(() => {
+            window.open(`https://meet.google.com/${roomCode}`, '_blank');
+          }, 1200);
+        }
+      });
+    }
+
+    // WhatsApp Direct Connect
+    const waBtn = document.getElementById('whatsappLink');
+    if (waBtn) {
+      waBtn.addEventListener('click', () => {
+        pauseAudio();
+        showToast('💬 WhatsApp open ho raha hai...');
       });
     }
 
@@ -951,8 +1020,8 @@
     window.addEventListener('load', playAudio);
     document.addEventListener('DOMContentLoaded', playAudio);
 
-    // 2. Fallback: Autoplay on very first touch, click, or scroll anywhere on page
-    const gestureEvents = ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown', 'keydown'];
+    // 2. Fallback: Autoplay synchronously on very first touch, click, or scroll anywhere on page
+    const gestureEvents = ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown'];
     function triggerAutoplay() {
       playAudio();
       cleanupAutoplay();
