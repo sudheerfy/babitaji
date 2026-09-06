@@ -557,14 +557,52 @@
     .meet-email-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.88rem;
+      gap: 8px;
+      font-size: 0.92rem;
       color: #80cbc4;
-      background: rgba(0, 168, 150, 0.12);
-      border: 1px solid rgba(0, 168, 150, 0.3);
-      padding: 5px 16px;
+      background: rgba(0, 168, 150, 0.14);
+      border: 1px solid rgba(0, 168, 150, 0.35);
+      padding: 6px 18px;
       border-radius: 999px;
       margin-bottom: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: all;
+    }
+
+    .meet-email-tag:active {
+      transform: scale(0.96);
+      background: rgba(0, 168, 150, 0.25);
+    }
+
+    .copy-badge {
+      font-size: 0.75rem;
+      background: rgba(0, 168, 150, 0.3);
+      color: #e0f2f1;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-left: 4px;
+      font-weight: 600;
+    }
+
+    .meet-instruction-pill {
+      font-size: 0.85rem;
+      color: #b2dfdb;
+      background: rgba(0, 168, 150, 0.08);
+      border: 1px dashed rgba(0, 168, 150, 0.32);
+      padding: 10px 16px;
+      border-radius: 12px;
+      margin-top: 14px;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .meet-instruction-pill code {
+      color: #80cbc4;
+      font-weight: 700;
+      background: rgba(0, 168, 150, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
     .meet-buttons-wrap {
@@ -855,7 +893,7 @@
     </section>
 
     <!-- ==========================================================================
-         STEP 5: GOOGLE MEET VIDEO CALL & SUDHEER PROMISE
+         STEP 5: GOOGLE MEET DIRECT CALL & SUDHEER PROMISE
          ========================================================================== -->
     <section class="step-card meet-box" id="stepMeet">
       <span class="step-badge" style="color: #80cbc4; border-color: rgba(0, 168, 150, 0.4);">STEP 5 • LET'S TALK FACE TO
@@ -864,9 +902,11 @@
       <div class="meet-avatar">📹</div>
       <h2 class="card-title" style="margin-bottom: 8px;">Aao Aamne-Saamne Baat Karein ❤️</h2>
 
-      <div class="meet-email-tag">
-        <span>📧 Host:</span>
-        <strong>sudheerfy@gmail.com</strong>
+      <!-- Target Gmail ID Tag (Tap to copy) -->
+      <div class="meet-email-tag" id="copyEmailTag" title="Tap to copy sudheerfy@gmail.com">
+        <span>📧 Call Target:</span>
+        <strong id="targetEmailText">sudheerfy@gmail.com</strong>
+        <span class="copy-badge">📋 Tap to Copy</span>
       </div>
 
       <p class="card-para" style="color: #e0f2f1; margin-bottom: 14px;">
@@ -875,21 +915,22 @@
       </p>
 
       <div class="meet-buttons-wrap">
-        <!-- Direct Meeting Link (opens installed Google Meet app or web room directly without Play Store) -->
-        <a href="https://meet.google.com/rkb-cyan-yna" target="_blank" class="btn-start-meet" id="googleMeetLink">
-          <span>📹 Join Google Meet Call</span>
-        </a>
+        <!-- Direct Call Button: Copies sudheerfy@gmail.com and launches Meet Calling App -->
+        <button type="button" class="btn-start-meet" id="googleMeetCallBtn">
+          <span>📹 Call Sudheer on Google Meet</span>
+        </button>
 
-        <!-- Direct WhatsApp Call / Message (100% working on all phones, zero install needed) -->
+        <!-- Direct WhatsApp Call / Message (100% working fallback) -->
         <a href="https://api.whatsapp.com/send?text=Hi%20Sudheer,%20maine%20website%20dekhi...%20aao%20baat%20karte%20hain%20❤️"
           target="_blank" class="btn-whatsapp-direct" id="whatsappLink">
           <span>💬 WhatsApp Par Baat Karein</span>
         </a>
       </div>
 
-      <p style="font-size: 0.8rem; color: #80cbc4; margin-top: 12px;">
-        Direct Room Code: rkb-cyan-yna • Host: sudheerfy@gmail.com
-      </p>
+      <!-- Clear Step-by-step guidance pill -->
+      <div class="meet-instruction-pill">
+        <span>✨ <strong>Direct Call Flow:</strong> बटन दबाते ही <code>sudheerfy@gmail.com</code> कॉपी हो जाएगी और Google Meet ऐप खुल जाएगा — ऊपर सर्च में पेस्ट करके सीधे कॉल करें! 📞</span>
+      </div>
     </section>
 
     <!-- ==========================================================================
@@ -979,22 +1020,54 @@
       }
     });
 
-    // Stop background music immediately when redirecting to Google Meet call
-    const meetBtn = document.getElementById('googleMeetLink');
-    if (meetBtn) {
-      meetBtn.addEventListener('click', (e) => {
-        pauseAudio();
-        showToast('🔇 Video Call shuru, music band kar diya ❤️');
+    // Target Gmail for direct Google Meet calling
+    const targetEmail = 'sudheerfy@gmail.com';
 
-        // On Android, launch Google Meet app directly without triggering Play Store install prompt
+    function copyTargetEmail() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(targetEmail).catch(() => { });
+      } else {
+        const tempInput = document.createElement('input');
+        tempInput.value = targetEmail;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
+    }
+
+    const copyEmailTag = document.getElementById('copyEmailTag');
+    if (copyEmailTag) {
+      copyEmailTag.addEventListener('click', () => {
+        copyTargetEmail();
+        showToast('📋 sudheerfy@gmail.com copy ho gaya!');
+      });
+    }
+
+    // Stop background music immediately & Launch Google Meet calling
+    const meetCallBtn = document.getElementById('googleMeetCallBtn');
+    if (meetCallBtn) {
+      meetCallBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        pauseAudio(); // Stop romantic song immediately so call audio is crystal clear
+        copyTargetEmail();
+        showToast('📋 sudheerfy@gmail.com copy ho gaya! Meet khul raha hai...');
+
+        // Launch Google Meet (package: com.google.android.apps.tachyon for Meet Calling / Duo)
         if (/Android/i.test(navigator.userAgent)) {
-          e.preventDefault();
-          const roomCode = 'sud-heer-call';
-          const intentUrl = `intent://meet.google.com/${roomCode}#Intent;scheme=https;package=com.google.android.apps.meetings;end`;
-          window.location.href = intentUrl;
+          // Intent to open Google Meet calling app directly
+          window.location.href = 'intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.apps.tachyon;end';
+
           setTimeout(() => {
-            window.open(`https://meet.google.com/${roomCode}`, '_blank');
+            window.location.href = 'intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.apps.meetings;end';
           }, 1200);
+
+          setTimeout(() => {
+            window.open('https://meet.google.com/', '_blank');
+          }, 2200);
+        } else {
+          // iOS or Desktop Browser
+          window.open('https://meet.google.com/', '_blank');
         }
       });
     }
