@@ -554,25 +554,41 @@
       color: #00e5bb;
     }
 
-    .meet-email-tag {
+    .contact-tags-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    .contact-pill-tag {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.92rem;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.90rem;
       color: #80cbc4;
       background: rgba(0, 168, 150, 0.14);
       border: 1px solid rgba(0, 168, 150, 0.35);
-      padding: 6px 18px;
+      padding: 7px 18px;
       border-radius: 999px;
-      margin-bottom: 14px;
       cursor: pointer;
       transition: all 0.2s ease;
       user-select: all;
+      max-width: 360px;
+      width: 100%;
     }
 
-    .meet-email-tag:active {
-      transform: scale(0.96);
-      background: rgba(0, 168, 150, 0.25);
+    .contact-pill-tag.wa-tag {
+      color: #b9f6ca;
+      background: rgba(37, 211, 102, 0.12);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+    }
+
+    .contact-pill-tag:active {
+      transform: scale(0.97);
     }
 
     .copy-badge {
@@ -583,6 +599,12 @@
       border-radius: 6px;
       margin-left: 4px;
       font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .copy-badge.wa-badge {
+      background: rgba(37, 211, 102, 0.3);
+      color: #e8f5e9;
     }
 
     .meet-instruction-pill {
@@ -664,6 +686,31 @@
       background: #22bf5b;
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+    }
+
+    .btn-phone-direct {
+      font-family: var(--font-english);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+      color: #ffffff;
+      font-size: 1.02rem;
+      font-weight: 700;
+      padding: 14px 24px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(30, 136, 229, 0.4);
+      transition: all 0.25s ease;
+      width: 100%;
+    }
+
+    .btn-phone-direct:hover,
+    .btn-phone-direct:active {
+      background: #1976d2;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(30, 136, 229, 0.6);
     }
 
     /* Final Thank You Note & Sudheer Signature */
@@ -902,11 +949,19 @@
       <div class="meet-avatar">📹</div>
       <h2 class="card-title" style="margin-bottom: 8px;">Aao Aamne-Saamne Baat Karein ❤️</h2>
 
-      <!-- Target Gmail ID Tag (Tap to copy) -->
-      <div class="meet-email-tag" id="copyEmailTag" title="Tap to copy sudheerfy@gmail.com">
-        <span>📧 Call Target:</span>
-        <strong id="targetEmailText">sudheerfy@gmail.com</strong>
-        <span class="copy-badge">📋 Tap to Copy</span>
+      <!-- Target Contact Tags (Tap to copy) -->
+      <div class="contact-tags-container">
+        <!-- Target Gmail ID Tag -->
+        <div class="contact-pill-tag" id="copyEmailTag" title="Tap to copy sudheerfy@gmail.com">
+          <span>📧 <strong>Target Gmail:</strong> <span id="targetEmailText">sudheerfy@gmail.com</span></span>
+          <span class="copy-badge">📋 Tap to Copy</span>
+        </div>
+
+        <!-- Target WhatsApp / Phone Tag -->
+        <div class="contact-pill-tag wa-tag" id="copyPhoneTag" title="Tap to copy 9918804121">
+          <span>📱 <strong>Target Call:</strong> <span id="targetPhoneText">9918804121</span></span>
+          <span class="copy-badge wa-badge">📋 Tap to Copy</span>
+        </div>
       </div>
 
       <p class="card-para" style="color: #e0f2f1; margin-bottom: 14px;">
@@ -920,16 +975,21 @@
           <span>📹 Call Sudheer on Google Meet</span>
         </button>
 
-        <!-- Direct WhatsApp Call / Message (100% working fallback) -->
-        <a href="https://api.whatsapp.com/send?text=Hi%20Sudheer,%20maine%20website%20dekhi...%20aao%20baat%20karte%20hain%20❤️"
+        <!-- Direct WhatsApp Call & Message to 9918804121 -->
+        <a href="https://api.whatsapp.com/send?phone=919918804121&text=Hi%20Sudheer,%20maine%20website%20dekhi...%20aao%20baat%20karte%20hain%20❤️"
           target="_blank" class="btn-whatsapp-direct" id="whatsappLink">
-          <span>💬 WhatsApp Par Baat Karein</span>
+          <span>💬 WhatsApp Call & Message (9918804121)</span>
+        </a>
+
+        <!-- Direct Mobile Phone Call to 9918804121 -->
+        <a href="tel:+919918804121" class="btn-phone-direct" id="phoneCallLink">
+          <span>📞 Direct Phone Call (9918804121)</span>
         </a>
       </div>
 
       <!-- Clear Step-by-step guidance pill -->
       <div class="meet-instruction-pill">
-        <span>✨ <strong>Direct Call Flow:</strong> बटन दबाते ही <code>sudheerfy@gmail.com</code> कॉपी हो जाएगी और Google Meet ऐप खुल जाएगा — ऊपर सर्च में पेस्ट करके सीधे कॉल करें! 📞</span>
+        <span>✨ <strong>Direct Connect:</strong> Google Meet me <code>sudheerfy@gmail.com</code> par call karein ya WhatsApp/Phone se seedhe <code>9918804121</code> par connect karein! 📞❤️</span>
       </div>
     </section>
 
@@ -1020,8 +1080,9 @@
       }
     });
 
-    // Target Gmail for direct Google Meet calling
+    // Target Contacts for direct Google Meet, WhatsApp & Calling
     const targetEmail = 'sudheerfy@gmail.com';
+    const targetPhone = '9918804121';
 
     function copyTargetEmail() {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1036,11 +1097,32 @@
       }
     }
 
+    function copyTargetPhone() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(targetPhone).catch(() => { });
+      } else {
+        const tempInput = document.createElement('input');
+        tempInput.value = targetPhone;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+      }
+    }
+
     const copyEmailTag = document.getElementById('copyEmailTag');
     if (copyEmailTag) {
       copyEmailTag.addEventListener('click', () => {
         copyTargetEmail();
         showToast('📋 sudheerfy@gmail.com copy ho gaya!');
+      });
+    }
+
+    const copyPhoneTag = document.getElementById('copyPhoneTag');
+    if (copyPhoneTag) {
+      copyPhoneTag.addEventListener('click', () => {
+        copyTargetPhone();
+        showToast('📋 9918804121 copy ho gaya!');
       });
     }
 
@@ -1072,12 +1154,21 @@
       });
     }
 
-    // WhatsApp Direct Connect
+    // WhatsApp Direct Connect (9918804121)
     const waBtn = document.getElementById('whatsappLink');
     if (waBtn) {
       waBtn.addEventListener('click', () => {
         pauseAudio();
-        showToast('💬 WhatsApp open ho raha hai...');
+        showToast('💬 WhatsApp open ho raha hai (9918804121)...');
+      });
+    }
+
+    // Direct Phone Call (9918804121)
+    const phoneBtn = document.getElementById('phoneCallLink');
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', () => {
+        pauseAudio();
+        showToast('📞 Dialing 9918804121...');
       });
     }
 
