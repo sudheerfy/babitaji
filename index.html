@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="hi" class="notranslate" translate="no">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="googlebot" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>For Babita</title>
+
+  <!-- Typography: Balanced & Elegant Hindi-English Font Combination -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kalam:wght@400;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Rozha+One&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       RESET & THEME VARIABLES (Clean, Warm, Romantic & Mobile-First)
+       ========================================================================== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg-dark: #12070e;
+      --bg-card: rgba(28, 14, 23, 0.78);
+      --bg-card-active: rgba(38, 18, 31, 0.92);
+      --accent-rose: #ff3b6c;
+      --accent-pink: #ff85a1;
+      --accent-gold: #ffcf70;
+      --accent-soft: rgba(255, 59, 108, 0.12);
+      --border-card: rgba(255, 133, 161, 0.16);
+      --border-highlight: rgba(255, 59, 108, 0.45);
+      --meet-green: #00897b;
+      --meet-green-hover: #00a896;
+      --text-bright: #fff5f7;
+      --text-muted: #d9c0cb;
+      --text-dim: #9e828f;
+      --font-english: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-hindi-head: 'Rozha One', 'Tiro Devanagari Hindi', serif;
+      --font-hindi-body: 'Tiro Devanagari Hindi', 'Plus Jakarta Sans', serif;
+      --font-hindi-hand: 'Kalam', 'Rozha One', 'Tiro Devanagari Hindi', cursive, serif;
+      --font-btn-hindi: 'Tiro Devanagari Hindi', 'Plus Jakarta Sans', serif;
+      --font-script: 'Great Vibes', cursive;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: var(--font-btn-hindi);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(circle at 50% 0%, #360f24 0%, transparent 60%),
+        radial-gradient(circle at 90% 85%, #29081a 0%, transparent 55%),
+        linear-gradient(180deg, #12070e 0%, #170a13 50%, #0d040a 100%);
+      background-attachment: fixed;
+      color: var(--text-bright);
+      font-family: var(--font-english);
+      line-height: 1.75;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient Canvas for Floating Love Particles */
+    #ambientCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==========================================================================
+       TOP BAR (Music Auto-Playing Indicator + Quick Control)
+       ========================================================================== */
+    .top-bar {
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(24, 11, 20, 0.88);
+      border: 1px solid var(--border-card);
+      border-radius: 999px;
+      padding: 8px 16px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.45);
+      margin-bottom: 20px;
+    }
+
+    .top-title {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-bright);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .top-title span.sub {
+      color: var(--accent-pink);
+      font-family: var(--font-script);
+      font-size: 1.25rem;
+      margin-left: 2px;
+    }
+
+    .music-pill {
+      font-family: var(--font-english);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent-soft);
+      border: 1px solid var(--border-highlight);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .music-pill:not(.playing) {
+      animation: gentlePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% {
+        box-shadow: 0 0 6px rgba(255, 59, 108, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 16px rgba(255, 59, 108, 0.7);
+        transform: scale(1.04);
+      }
+    }
+
+    .music-pill.playing {
+      background: var(--accent-rose);
+      box-shadow: 0 0 14px rgba(255, 59, 108, 0.6);
+    }
+
+    .music-pill.playing .disc-icon {
+      animation: spinDisc 2.5s linear infinite;
+    }
+
+    @keyframes spinDisc {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ==========================================================================
+       MAIN WRAPPER & STEP-BY-STEP CARDS
+       ========================================================================== */
+    .flow-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 70px;
+    }
+
+    /* Step Card Base */
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 22px;
+      padding: 26px 20px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      position: relative;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .step-card:hover {
+      border-color: var(--border-highlight);
+    }
+
+    /* Step Badge Indicator */
+    .step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-pink);
+      background: var(--accent-soft);
+      border: 1px solid rgba(255, 59, 108, 0.25);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    /* ==========================================================================
+       STEP 1: OPENING HERO & HEART PLAY
+       ========================================================================== */
+    .hero-box {
+      text-align: center;
+      padding: 34px 18px 28px 18px;
+    }
+
+    .heart-player {
+      position: relative;
+      display: inline-block;
+      margin: 8px 0 14px 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .big-pulsing-heart {
+      font-size: 3.8rem;
+      display: inline-block;
+      animation: heartbeatAnim 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 59, 108, 0.65));
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .heart-player:active .big-pulsing-heart {
+      transform: scale(0.85);
+    }
+
+    .heart-tap-hint {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--accent-pink);
+      letter-spacing: 0.05em;
+      margin-top: -4px;
+      opacity: 0.85;
+    }
+
+    @keyframes heartbeatAnim {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      14% {
+        transform: scale(1.18);
+      }
+
+      28% {
+        transform: scale(1.02);
+      }
+
+      42% {
+        transform: scale(1.14);
+      }
+    }
+
+    .name-heading {
+      font-family: var(--font-script);
+      font-size: 4rem;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 14px;
+      text-shadow: 0 0 25px rgba(255, 59, 108, 0.5);
+    }
+
+    .typewriter-box {
+      min-height: 80px;
+      font-family: var(--font-hindi-body);
+      font-size: 1.12rem;
+      color: var(--text-bright);
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.15em;
+      background: var(--accent-rose);
+      vertical-align: middle;
+      animation: blinkCursor 0.8s infinite;
+    }
+
+    @keyframes blinkCursor {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .btn-flow {
+      font-family: var(--font-btn-hindi);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent-rose);
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 13px 30px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(255, 59, 108, 0.45);
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-flow:hover,
+    .btn-flow:active {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255, 59, 108, 0.65);
+    }
+
+    /* ==========================================================================
+       STEP 2 & STEP HEADINGS & TEXT
+       ========================================================================== */
+    .card-title {
+      font-family: var(--font-hindi-head);
+      font-size: 1.65rem;
+      color: #ffffff;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .card-para {
+      font-family: var(--font-hindi-body);
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .card-para+.card-para {
+      margin-top: 14px;
+    }
+
+    .quote-callout {
+      border-left: 3px solid var(--accent-rose);
+      background: rgba(255, 59, 108, 0.08);
+      padding: 16px 18px;
+      border-radius: 0 16px 16px 0;
+      margin: 18px 0;
+      font-family: var(--font-hindi-head);
+      font-size: 1.18rem;
+      color: #ffffff;
+      line-height: 1.7;
+    }
+
+    /* ==========================================================================
+       STEP 3: BABITA'S FAVORITE TREATS (Interactive & Cute)
+       ========================================================================== */
+    .treats-intro {
+      font-family: var(--font-hindi-body);
+      font-size: 1.02rem;
+      color: var(--text-bright);
+      margin-bottom: 16px;
+    }
+
+    .treats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .treat-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .treat-item:hover,
+    .treat-item:active,
+    .treat-item.selected {
+      background: rgba(255, 59, 108, 0.15);
+      border-color: var(--accent-rose);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(255, 59, 108, 0.25);
+    }
+
+    .treat-emoji {
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .treat-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .treat-note {
+      font-family: var(--font-hindi-body);
+      font-size: 0.78rem;
+      color: var(--accent-pink);
+    }
+
+    /* Live message when she taps a treat */
+    .treat-message-box {
+      margin-top: 16px;
+      background: rgba(255, 59, 108, 0.1);
+      border: 1px dashed var(--accent-rose);
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-family: var(--font-hindi-body);
+      font-size: 0.98rem;
+      color: #fff;
+      text-align: center;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInBox 0.3s ease;
+    }
+
+    @keyframes fadeInBox {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* ==========================================================================
+       STEP 4: INTERACTIVE DECISION
+       ========================================================================== */
+    .decision-center {
+      text-align: center;
+    }
+
+    .btn-group-step {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 22px;
+      position: relative;
+    }
+
+    .btn-accept {
+      font-family: var(--font-btn-hindi);
+      background: var(--accent-rose);
+      color: #fff;
+      border: none;
+      padding: 15px 24px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 6px 25px rgba(255, 59, 108, 0.45);
+      transition: all 0.25s ease;
+    }
+
+    .btn-accept:hover,
+    .btn-accept:active {
+      transform: scale(1.02);
+      box-shadow: 0 8px 30px rgba(255, 59, 108, 0.65);
+    }
+
+    .btn-playful-dodge {
+      font-family: var(--font-btn-hindi);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-card);
+      color: var(--text-muted);
+      padding: 13px 22px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* ==========================================================================
+       STEP 5: GOOGLE MEET CALL & SUDHEER SIGNATURE (Revealed on YES)
+       ========================================================================== */
+    #stepMeet {
+      display: none;
+      animation: revealCard 0.6s ease both;
+    }
+
+    #stepMeet.unlocked {
+      display: block;
+    }
+
+    @keyframes revealCard {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .meet-box {
+      background: linear-gradient(135deg, rgba(28, 14, 23, 0.95) 0%, rgba(10, 36, 30, 0.85) 100%);
+      border: 1px solid rgba(0, 168, 150, 0.4);
+      box-shadow: 0 10px 40px rgba(0, 168, 150, 0.2);
+      text-align: center;
+    }
+
+    .meet-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(0, 168, 150, 0.2);
+      border: 2px solid #00bfa5;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: #00e5bb;
+    }
+
+    .meet-email-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: #80cbc4;
+      background: rgba(0, 168, 150, 0.12);
+      border: 1px solid rgba(0, 168, 150, 0.3);
+      padding: 5px 16px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .btn-start-meet {
+      font-family: var(--font-english);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #00897b 0%, #00a896 100%);
+      color: #ffffff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 16px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(0, 168, 150, 0.45);
+      transition: all 0.25s ease;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn-start-meet:hover,
+    .btn-start-meet:active {
+      background: #00bfa5;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0, 168, 150, 0.65);
+    }
+
+    /* Final Thank You Note & Sudheer Signature */
+    .thank-you-box {
+      text-align: center;
+      display: none;
+    }
+
+    .thank-you-box.unlocked {
+      display: block;
+      animation: revealCard 0.6s ease both 0.1s;
+    }
+
+    .climax-quote {
+      font-family: var(--font-hindi-head);
+      font-size: 1.28rem;
+      color: #fff;
+      margin: 18px 0;
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255, 59, 108, 0.08);
+      border: 1px dashed rgba(255, 59, 108, 0.3);
+      line-height: 1.75;
+    }
+
+    .signature-sudheer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 14px;
+      text-align: right;
+    }
+
+    .signature-sudheer .sig-hindi {
+      font-family: var(--font-hindi-hand);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-rose);
+      text-shadow: 0 0 16px rgba(255, 59, 108, 0.45);
+      letter-spacing: 0.04em;
+    }
+
+    .signature-sudheer .sig-name {
+      font-family: var(--font-script);
+      font-size: 3.4rem;
+      line-height: 1;
+      color: var(--accent-rose);
+      text-shadow: 0 0 18px rgba(255, 59, 108, 0.5);
+    }
+
+    .signature-sudheer .sig-heart {
+      font-size: 2rem;
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    /* Quick Toast */
+    .toast-pill {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(28, 14, 23, 0.95);
+      border: 1px solid var(--accent-rose);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.35s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast-pill.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body class="notranslate" translate="no">
+
+  <!-- Floating Ambient Canvas -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <!-- Top Sticky Bar (Music Auto-play Indicator + Song Control) -->
+  <header class="top-bar">
+    <div class="top-title">
+      <span>❤️</span>
+      <span>For Babita</span>
+    </div>
+    <button class="music-pill" id="musicBtn" aria-label="Toggle romantic song">
+      <span class="disc-icon">🎵</span>
+      <span id="musicText">Tum Hi Ho</span>
+    </button>
+  </header>
+
+  <!-- Ultra-lightweight (45KB) Tum Hi Ho romantic clip with continuous loop -->
+  <audio id="romanticAudio" src="music.mp3" preload="auto" loop="loop" playsinline autoplay></audio>
+
+  <!-- Toast Notification -->
+  <div class="toast-pill" id="toastPill"></div>
+
+  <!-- Main Step-by-Step Flow Wrapper -->
+  <main class="flow-wrapper">
+
+    <!-- ==========================================================================
+         STEP 1: HELLO BABITA & HEART PLAY
+         ========================================================================== -->
+    <section class="step-card hero-box" id="step1">
+      <span class="step-badge">STEP 1 • SPECIAL MESSAGE</span>
+      <br>
+
+      <!-- Interactive Heart Play -->
+      <div class="heart-player" id="heartPlayer" title="Tap the heart!">
+        <div class="big-pulsing-heart">❤️</div>
+        <span class="heart-tap-hint">Tap heart for love ✨</span>
+      </div>
+
+      <h1 class="name-heading">Babita</h1>
+
+      <div class="typewriter-box">
+        <span id="typewriterText"></span><span class="cursor"></span>
+      </div>
+
+      <a href="#step2" class="btn-flow" id="beginBtn">
+        <span>एक छोटी सी बात सुनोगी?</span>
+        <span>💌</span>
+      </a>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 2: SINCERE APOLOGY
+         ========================================================================== -->
+    <section class="step-card" id="step2">
+      <span class="step-badge">STEP 2 • DIL SE MAAFI</span>
+      <h2 class="card-title">सबसे पहले… एक दिल से Sorry 🥺</h2>
+
+      <p class="card-para">
+        कल रात बात करते समय मेरी कुछ बातें तुम्हें hurt हुईं… और सच कहूँ तो मेरा इराda तुम्हें दुख देने का बिल्कुल नहीं
+        था। फिर भी अगर मेरी बातों से तुम्हारा दिल दुखा, तो उसके लिए मैं genuinely sorry हूँ।
+      </p>
+      <p class="card-para">
+        मैं अपनी बात को सही साबित करने से ज्यादा तुम्हारी feelings को समझना चाहता हूँ।
+      </p>
+
+      <div class="quote-callout">
+        “तुमसे नाराज़ होने का हक़ शायद तुम्हें है,<br>
+        लेकिन तुम्हें उदास देखना मुझे बिल्कुल पसंद नहीं।” ❤️
+      </div>
+
+      <p class="card-para">
+        कोई बड़ा promise नहीं… बस इतना कि आगे से बोलने से पहले थोड़ा और सोचूँगा, और तुम्हारी feelings को कभी हल्के में
+        नहीं लूँगा।
+      </p>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 3: BABITA'S FAVORITE TREATS (Ice cream, Dairy Milk, Kheer, Phulki)
+         ========================================================================== -->
+    <section class="step-card" id="step3">
+      <span class="step-badge">STEP 3 • BABITA KE FAVORITE TREATS</span>
+      <h2 class="card-title">तुम्हें मनाने की मीठी तैयारी 🍓</h2>
+      <p class="treats-intro">
+        मुझे पता है तुम्हारा गुस्सा कैसे पिघलता है! किसी भी एक treat पर tap करो:
+      </p>
+
+      <div class="treats-grid">
+        <!-- Treat 1: Strawberry Ice Cream -->
+        <div class="treat-item" onclick="selectTreat('strawberry')">
+          <span class="treat-emoji">🍓🍦</span>
+          <div class="treat-name">Strawberry Ice Cream</div>
+          <div class="treat-note">Tumhari favorite</div>
+        </div>
+
+        <!-- Treat 2: Dairy Milk -->
+        <div class="treat-item" onclick="selectTreat('dairymilk')">
+          <span class="treat-emoji">🍫✨</span>
+          <div class="treat-name">Dairy Milk</div>
+          <div class="treat-note">Sweet chocolate</div>
+        </div>
+
+        <!-- Treat 3: Kheer -->
+        <div class="treat-item" onclick="selectTreat('kheer')">
+          <span class="treat-emoji">🥣❤️</span>
+          <div class="treat-name">Ghar Ki Kheer</div>
+          <div class="treat-note">Desi mithas</div>
+        </div>
+
+        <!-- Treat 4: Phulki / Golgappe -->
+        <div class="treat-item" onclick="selectTreat('phulki')">
+          <span class="treat-emoji">🧆😋</span>
+          <div class="treat-name">Teekhi Phulki</div>
+          <div class="treat-note">Golgappe party</div>
+        </div>
+      </div>
+
+      <!-- Live message box when she taps treats -->
+      <div class="treat-message-box" id="treatMsg">
+        👆 Up ki kisi bhi cheez ko tap karke dekho!
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 4: DECISION & PLAYFUL DODGE
+         ========================================================================== -->
+    <section class="step-card decision-center" id="step4">
+      <span class="step-badge">STEP 4 • YOUR DECISION</span>
+      <h2 class="card-title">अब फैसला तुम्हारा है 🌸</h2>
+      <p class="card-para">
+        क्या मेरी एक छोटी सी गलती के लिए मुझे थोड़ा सा chance मिलेगा?
+      </p>
+
+      <div class="btn-group-step">
+        <button class="btn-accept" id="acceptBtn">
+          हाँ, थोड़ा सा ❤️
+        </button>
+
+        <button class="btn-playful-dodge" id="dodgeBtn">
+          अभी सोच रही हूँ 🙈
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 5: GOOGLE MEET VIDEO CALL & SUDHEER PROMISE
+         ========================================================================== -->
+    <section class="step-card meet-box" id="stepMeet">
+      <span class="step-badge" style="color: #80cbc4; border-color: rgba(0, 168, 150, 0.4);">STEP 5 • LET'S TALK FACE TO
+        FACE</span>
+      <br>
+      <div class="meet-avatar">📹</div>
+      <h2 class="card-title" style="margin-bottom: 8px;">Google Meet Par Call Karein?</h2>
+
+      <div class="meet-email-tag">
+        <span>📧 Host:</span>
+        <strong>sudheerfy@gmail.com</strong>
+      </div>
+
+      <p class="card-para" style="color: #e0f2f1; margin-bottom: 16px;">
+        Sudheer wait kar raha hai. Bas 2 minute ke liye video call par aao Babita, aamne-saamne muskura ke baat karte
+        hain aur saari dooriyan khatam karte hain ❤️
+      </p>
+
+      <!-- Direct Google Meet video link -->
+      <a href="https://meet.google.com/new" target="_blank" class="btn-start-meet" id="googleMeetLink">
+        <span>📹 Join Google Meet Now</span>
+      </a>
+
+      <p style="font-size: 0.8rem; color: #80cbc4; margin-top: 12px;">
+        Click karte hi Google Meet khul jayega • sudheerfy@gmail.com
+      </p>
+    </section>
+
+    <!-- ==========================================================================
+         FINAL THANK YOU NOTE & SUDHEER'S SIGNATURE
+         ========================================================================== -->
+    <section class="step-card thank-you-box" id="stepThankYou">
+      <h2 class="card-title">Thank You, Babita 💖</h2>
+      <p class="card-para">
+        अगर तुम यहाँ तक पढ़ रही हो, तो मेरे लिए इतना ही बहुत है। मैं चाहता हूँ कि हमारे बीच छोटी-छोटी गलतफहमियाँ कभी
+        बड़ी न बनें। बात हो, नाराज़गी हो, बहस हो—लेकिन अंत में एक-दूसरे को समझने की कोशिश हमेशा बनी रहे।
+      </p>
+
+      <div class="climax-quote">
+        “मुझे perfect नहीं बनना…<br>
+        बस तुम्हारे लिए थोड़ा बेहतर बनना है।” ❤️
+      </div>
+
+      <!-- Specifically signed by Sudheer with handwritten Hindi & English fonts -->
+      <div class="signature-sudheer">
+        <span class="sig-hindi">— तुम्हारा</span>
+        <span class="sig-name">Sudheer</span>
+        <span class="sig-heart">❤️</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       LIGHTWEIGHT VANILLA JS LOGIC
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       1. ULTRA-LIGHTWEIGHT MUSIC CONTROLLER (Loads instantly, autoplay on interaction)
+       -------------------------------------------------------------------------- */
+    const audio = document.getElementById('romanticAudio');
+    audio.volume = 0.30; // Set soft, gentle 30% background volume
+    audio.loop = true;
+    audio.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play().catch(() => {});
+    }, false);
+    const musicBtn = document.getElementById('musicBtn');
+    const musicText = document.getElementById('musicText');
+    const toastPill = document.getElementById('toastPill');
+    let isPlaying = false;
+
+    function showToast(text) {
+      toastPill.textContent = text;
+      toastPill.classList.add('visible');
+      setTimeout(() => toastPill.classList.remove('visible'), 2800);
+    }
+
+    function playAudio() {
+      if (!isPlaying) {
+        audio.volume = 0.30; // Maintain 30% soft volume
+        audio.play().then(() => {
+          isPlaying = true;
+          musicBtn.classList.add('playing');
+          musicText.textContent = 'Pause Song';
+          showToast('🎵 Tum Hi Ho playing...');
+          cleanupAutoplay();
+        }).catch(() => {
+          // Autoplay policy waiting for first user gesture
+        });
+      }
+    }
+
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      musicBtn.classList.remove('playing');
+      musicText.textContent = 'Play Song';
+    }
+
+    // Toggle or stop music immediately when button is clicked
+    musicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        pauseAudio();
+        showToast('⏸️ Music stopped');
+      } else {
+        playAudio();
+      }
+    });
+
+    // Stop background music immediately when redirecting to Google Meet call
+    const meetBtn = document.getElementById('googleMeetLink');
+    if (meetBtn) {
+      meetBtn.addEventListener('click', () => {
+        pauseAudio();
+        showToast('🔇 Video Call shuru, music band kar diya ❤️');
+      });
+    }
+
+    // Automatically pause music if Babita switches tabs or window loses focus
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && isPlaying) {
+        pauseAudio();
+      }
+    });
+
+    // 1. Attempt immediate autoplay on load
+    playAudio();
+    window.addEventListener('load', playAudio);
+    document.addEventListener('DOMContentLoaded', playAudio);
+
+    // 2. Fallback: Autoplay on very first touch, click, or scroll anywhere on page
+    const gestureEvents = ['touchstart', 'touchend', 'click', 'scroll', 'pointerdown', 'keydown'];
+    function triggerAutoplay() {
+      playAudio();
+      cleanupAutoplay();
+    }
+    function cleanupAutoplay() {
+      gestureEvents.forEach(evt => {
+        window.removeEventListener(evt, triggerAutoplay, { capture: true });
+        document.removeEventListener(evt, triggerAutoplay, { capture: true });
+      });
+    }
+    gestureEvents.forEach(evt => {
+      window.addEventListener(evt, triggerAutoplay, { once: true, passive: true, capture: true });
+      document.addEventListener(evt, triggerAutoplay, { once: true, passive: true, capture: true });
+    });
+
+    /* --------------------------------------------------------------------------
+       2. TYPEWRITER ANIMATION
+       -------------------------------------------------------------------------- */
+    const textToType = "कल रात की कुछ बातें शायद तुम्हारे दिल को अच्छी नहीं लगीं…\nइसलिए आज ये छोटी सी जगह सिर्फ तुम्हें मनाने के लिए। ❤️";
+    const typewriterElement = document.getElementById('typewriterText');
+    let charIdx = 0;
+
+    function runTypewriter() {
+      if (charIdx < textToType.length) {
+        typewriterElement.textContent += textToType.charAt(charIdx);
+        charIdx++;
+        let delay = textToType.charAt(charIdx - 1) === '\n' ? 380 : 42;
+        setTimeout(runTypewriter, delay);
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => setTimeout(runTypewriter, 400));
+
+    /* --------------------------------------------------------------------------
+       3. INTERACTIVE TREATS SELECTOR
+       -------------------------------------------------------------------------- */
+    const treatMessages = {
+      strawberry: "🍓 Strawberry Ice Cream tumhare liye! Ek bite tumhari aur saara gussa gayab! 🥰",
+      dairymilk: "🍫 Dairy Milk Silk ka bada wala pack Sudheer ki taraf se ready hai! 😋",
+      kheer: "🥣 Mumma ke haath jaisi meethi Kheer kha ke saari naraazgi khatam karein? ❤️",
+      phulki: "🧆 Shaam ko Phulki (Pani Puri) ki party pakki! Jitni teekhi chaho utni khana! 💃"
+    };
+
+    function selectTreat(key) {
+      document.querySelectorAll('.treat-item').forEach(el => el.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      const box = document.getElementById('treatMsg');
+      box.textContent = treatMessages[key];
+      box.style.animation = 'none';
+      box.offsetHeight; /* trigger reflow */
+      box.style.animation = 'fadeInBox 0.3s ease';
+
+      // Launch heart burst on treat select
+      burstHeartsAt(event.clientX || window.innerWidth / 2, event.clientY || window.innerHeight / 2);
+    }
+
+    /* --------------------------------------------------------------------------
+       4. PLAYFUL DODGE BUTTON LOGIC
+       -------------------------------------------------------------------------- */
+    const dodgeBtn = document.getElementById('dodgeBtn');
+    const dodgeQuotes = [
+      "एक मिनट 😅",
+      "पहले सोच लो 🙈",
+      "इतनी जल्दी नहीं 😄",
+      "थोड़ा और मनाओ 🥺",
+      "Dairy Milk khila ke manao 🍫"
+    ];
+    let dodgeCount = 0;
+
+    function dodge(e) {
+      if (e) e.preventDefault();
+      dodgeCount++;
+      dodgeBtn.textContent = dodgeQuotes[dodgeCount % dodgeQuotes.length];
+
+      const x = (Math.random() - 0.5) * 80;
+      const y = (Math.random() - 0.5) * 35;
+      dodgeBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    dodgeBtn.addEventListener('click', dodge);
+    dodgeBtn.addEventListener('touchstart', dodge, { passive: false });
+
+    /* --------------------------------------------------------------------------
+       5. ACCEPT BUTTON -> UNLOCK MEET & THANK YOU
+       -------------------------------------------------------------------------- */
+    const acceptBtn = document.getElementById('acceptBtn');
+    const stepMeet = document.getElementById('stepMeet');
+    const stepThankYou = document.getElementById('stepThankYou');
+
+    acceptBtn.addEventListener('click', (e) => {
+      acceptBtn.textContent = "शुक्रिया बाबू! 🥰";
+      acceptBtn.style.background = "#00897b";
+      dodgeBtn.style.display = "none";
+
+      // Unlock Step 5 (Google Meet) & Final Thank You
+      stepMeet.classList.add('unlocked');
+      stepThankYou.classList.add('unlocked');
+
+      // Burst celebratory hearts
+      burstHeartsAt(window.innerWidth / 2, window.innerHeight / 2, 45);
+
+      setTimeout(() => {
+        stepMeet.scrollIntoView({ behavior: 'smooth' });
+      }, 350);
+    });
+
+    /* --------------------------------------------------------------------------
+       6. INTERACTIVE HEART PLAY (Ambient + Tap Burst)
+       -------------------------------------------------------------------------- */
+    const canvas = document.getElementById('ambientCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    class FloatingHeart {
+      constructor(burst = false, bx = 0, by = 0) {
+        this.reset(burst, bx, by);
+      }
+      reset(burst = false, bx = 0, by = 0) {
+        this.x = burst ? bx : Math.random() * canvas.width;
+        this.y = burst ? by : canvas.height + 15;
+        this.size = Math.random() * 14 + 10;
+        this.speedY = burst ? (Math.random() * -6 - 2) : (Math.random() * 0.7 + 0.3);
+        this.speedX = burst ? (Math.random() - 0.5) * 6 : Math.sin(Math.random()) * 0.35;
+        this.opacity = burst ? 1 : Math.random() * 0.4 + 0.15;
+        this.decay = burst ? 0.018 : 0;
+        this.symbol = ['❤️', '💖', '🍓', '🌸', '✨', '🍫'][Math.floor(Math.random() * 6)];
+      }
+      update() {
+        if (this.decay > 0) {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          this.speedY += 0.12;
+          this.opacity -= this.decay;
+        } else {
+          this.y -= this.speedY;
+          this.x += this.speedX;
+          if (this.y < -30) this.reset(false);
+        }
+      }
+      draw() {
+        if (this.opacity <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = Math.max(this.opacity, 0);
+        ctx.font = `${this.size}px serif`;
+        ctx.textAlign = 'center';
+        ctx.fillText(this.symbol, this.x, this.y);
+        ctx.restore();
+      }
+    }
+
+    // Initialize steady ambient flow
+    for (let i = 0; i < 18; i++) {
+      const p = new FloatingHeart(false);
+      p.y = Math.random() * canvas.height;
+      particles.push(p);
+    }
+
+    function burstHeartsAt(x, y, count = 16) {
+      for (let i = 0; i < count; i++) {
+        particles.push(new FloatingHeart(true, x, y));
+      }
+    }
+
+    function renderLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.decay > 0 && p.opacity <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+
+    // Heart Logo Tap Interaction
+    document.getElementById('heartPlayer').addEventListener('click', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      burstHeartsAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 22);
+      playAudio(); // Also trigger audio playback smoothly
+    });
+  </script>
+</body>
+
+</html>
