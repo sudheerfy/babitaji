@@ -607,26 +607,6 @@
       color: #e8f5e9;
     }
 
-    .meet-instruction-pill {
-      font-size: 0.85rem;
-      color: #b2dfdb;
-      background: rgba(0, 168, 150, 0.08);
-      border: 1px dashed rgba(0, 168, 150, 0.32);
-      padding: 10px 16px;
-      border-radius: 12px;
-      margin-top: 14px;
-      line-height: 1.55;
-      text-align: center;
-    }
-
-    .meet-instruction-pill code {
-      color: #80cbc4;
-      font-weight: 700;
-      background: rgba(0, 168, 150, 0.2);
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
     .meet-buttons-wrap {
       display: flex;
       flex-direction: column;
@@ -792,6 +772,74 @@
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
+
+    /* ==========================================================================
+       AFTER 06 SEP 2026: TIMELESS SPECIAL MESSAGE
+       ========================================================================== */
+    #postDateSection {
+      display: none;
+      width: 100%;
+      max-width: 480px;
+      margin: 20px auto 40px;
+      animation: revealCard 0.8s ease both;
+      z-index: 1;
+      position: relative;
+    }
+
+    #postDateSection.active {
+      display: block;
+    }
+
+    .timeless-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 30px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+      text-align: center;
+      position: relative;
+    }
+
+    .timeless-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(255, 207, 112, 0.12);
+      border: 1px solid rgba(255, 207, 112, 0.3);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+
+    .timeless-date-tag {
+      font-size: 0.88rem;
+      color: var(--accent-pink);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .btn-toggle-original {
+      margin-top: 24px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: color 0.2s;
+    }
+
+    .btn-toggle-original:hover {
+      color: var(--text-muted);
+    }
   </style>
 </head>
 
@@ -817,6 +865,69 @@
 
   <!-- Toast Notification -->
   <div class="toast-pill" id="toastPill"></div>
+
+  <!-- ==========================================================================
+       AFTER 06 SEP 2026: TIMELESS SPECIAL MESSAGE SECTION
+       ========================================================================== -->
+  <section id="postDateSection">
+    <div class="timeless-card">
+      <span class="timeless-badge">✨ TIMELESS MEMORY • FOREVER SPECIAL</span>
+      <br>
+      <div class="big-pulsing-heart" style="font-size: 3.2rem; margin: 10px 0 16px;">💖</div>
+
+      <h1 class="name-heading" style="font-size: 2.3rem; margin-bottom: 6px;">Babita</h1>
+      <div class="timeless-date-tag">06 September 2026 का प्यारा पैगाम 🌸</div>
+
+      <p class="card-para" style="font-size: 1.05rem; line-height: 1.8; margin-top: 14px;">
+        यह ख़ास जगह <strong>6 सितंबर 2026</strong> को सिर्फ तुम्हें मनाने और तुम्हारे चेहरे पर मुस्कान लाने के लिए बनाई गई थी। ❤️
+      </p>
+
+      <p class="card-para" style="line-height: 1.8;">
+        तारीखें बदल सकती हैं, दिन आगे बढ़ सकते हैं… लेकिन तुम्हारे लिए मेरा प्यार, फिक्र और अपनापन कभी पुराना नहीं होगा।
+      </p>
+
+      <div class="climax-quote" style="margin: 20px 0;">
+        “नाराज़गी सिर्फ एक पल की थी…<br>
+        लेकिन तुम्हारा साथ ज़िंदगी भर का है।” ✨
+      </div>
+
+      <p class="card-para" style="color: var(--text-muted); font-size: 0.96rem; margin-bottom: 22px;">
+        जब भी तुम्हारा दिल करे, याद रखना—तुम्हारा Sudheer हमेशा एक message या call की दूरी पर है। 🥰
+      </p>
+
+      <div class="contact-tags-container">
+        <div class="contact-pill-tag wa-tag" id="copyPhoneTagPost" title="Tap to copy 9918804121">
+          <span>📱 <strong>Sudheer's Contact:</strong> <span>9918804121</span></span>
+          <span class="copy-badge wa-badge">📋 Tap to Copy</span>
+        </div>
+      </div>
+
+      <div class="meet-buttons-wrap" style="margin-top: 14px;">
+        <!-- Direct WhatsApp Call & Message -->
+        <a href="https://api.whatsapp.com/send?phone=919918804121&text=Hi%20Sudheer,%20maine%20purani%20yaad%20dekhi...%20❤️"
+          target="_blank" class="btn-whatsapp-direct" id="waPostBtn">
+          <span>💬 WhatsApp Call & Message (9918804121)</span>
+        </a>
+
+        <!-- Direct Mobile Phone Call -->
+        <a href="tel:+919918804121" class="btn-phone-direct" id="phonePostBtn">
+          <span>📞 Direct Phone Call (9918804121)</span>
+        </a>
+      </div>
+
+      <!-- Sudheer's Signature -->
+      <div class="signature-sudheer" style="margin-top: 24px;">
+        <span class="sig-hindi">— तुम्हारा</span>
+        <span class="sig-name">Sudheer</span>
+        <span class="sig-heart">❤️</span>
+      </div>
+
+      <!-- Option to view original 06 Sep apology message -->
+      <button type="button" class="btn-toggle-original" id="viewOriginalBtn">
+        💌 6 सितंबर 2026 का मूल संदेश (Original Apology) देखें
+      </button>
+    </div>
+  </section>
 
   <!-- Main Step-by-Step Flow Wrapper -->
   <main class="flow-wrapper">
@@ -940,23 +1051,16 @@
     </section>
 
     <!-- ==========================================================================
-         STEP 5: GOOGLE MEET DIRECT CALL & SUDHEER PROMISE
+         STEP 5: DIRECT CONNECT (WHATSAPP & CALL) & SUDHEER PROMISE
          ========================================================================== -->
     <section class="step-card meet-box" id="stepMeet">
-      <span class="step-badge" style="color: #80cbc4; border-color: rgba(0, 168, 150, 0.4);">STEP 5 • LET'S TALK FACE TO
-        FACE</span>
+      <span class="step-badge" style="color: #b9f6ca; border-color: rgba(37, 211, 102, 0.4);">STEP 5 • AAO BAAT KAREIN</span>
       <br>
-      <div class="meet-avatar">📹</div>
-      <h2 class="card-title" style="margin-bottom: 8px;">Aao Aamne-Saamne Baat Karein ❤️</h2>
+      <div class="meet-avatar" style="border-color: #25d366; background: rgba(37, 211, 102, 0.2); color: #25d366;">💬</div>
+      <h2 class="card-title" style="margin-bottom: 8px;">Aao Baat Karein ❤️</h2>
 
-      <!-- Target Contact Tags (Tap to copy) -->
+      <!-- Target Contact Tag (Tap to copy) -->
       <div class="contact-tags-container">
-        <!-- Target Gmail ID Tag -->
-        <div class="contact-pill-tag" id="copyEmailTag" title="Tap to copy sudheerfy@gmail.com">
-          <span>📧 <strong>Target Gmail:</strong> <span id="targetEmailText">sudheerfy@gmail.com</span></span>
-          <span class="copy-badge">📋 Tap to Copy</span>
-        </div>
-
         <!-- Target WhatsApp / Phone Tag -->
         <div class="contact-pill-tag wa-tag" id="copyPhoneTag" title="Tap to copy 9918804121">
           <span>📱 <strong>Target Call:</strong> <span id="targetPhoneText">9918804121</span></span>
@@ -965,18 +1069,13 @@
       </div>
 
       <p class="card-para" style="color: #e0f2f1; margin-bottom: 14px;">
-        Sudheer wait kar raha hai. Bas 2 minute ke liye call par aao Babita, muskura ke baat karte hain aur saari
+        Sudheer wait kar raha hai. Bas 2 minute ke liye baat kar lo Babita, muskura ke baat karte hain aur saari
         dooriyan khatam karte hain ❤️
       </p>
 
       <div class="meet-buttons-wrap">
-        <!-- Direct Call Button: Copies sudheerfy@gmail.com and launches Meet Calling App -->
-        <button type="button" class="btn-start-meet" id="googleMeetCallBtn">
-          <span>📹 Call Sudheer on Google Meet</span>
-        </button>
-
         <!-- Direct WhatsApp Call & Message to 9918804121 -->
-        <a href="https://api.whatsapp.com/send?phone=919918804121&text=Hi%20Sudheer,%20maine%20website%20dekhi...%20aao%20baat%20karte%20hain%20❤️"
+        <a href="https://api.whatsapp.com/send?phone=919918804121&text=Hi%20Sudheer,%20maine%20dekha...%20aao%20baat%20karte%20hain%20❤️"
           target="_blank" class="btn-whatsapp-direct" id="whatsappLink">
           <span>💬 WhatsApp Call & Message (9918804121)</span>
         </a>
@@ -985,11 +1084,6 @@
         <a href="tel:+919918804121" class="btn-phone-direct" id="phoneCallLink">
           <span>📞 Direct Phone Call (9918804121)</span>
         </a>
-      </div>
-
-      <!-- Clear Step-by-step guidance pill -->
-      <div class="meet-instruction-pill">
-        <span>✨ <strong>Direct Connect:</strong> Google Meet me <code>sudheerfy@gmail.com</code> par call karein ya WhatsApp/Phone se seedhe <code>9918804121</code> par connect karein! 📞❤️</span>
       </div>
     </section>
 
@@ -1080,22 +1174,8 @@
       }
     });
 
-    // Target Contacts for direct Google Meet, WhatsApp & Calling
-    const targetEmail = 'sudheerfy@gmail.com';
+    // Target Phone for WhatsApp & Direct Calling (9918804121)
     const targetPhone = '9918804121';
-
-    function copyTargetEmail() {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(targetEmail).catch(() => { });
-      } else {
-        const tempInput = document.createElement('input');
-        tempInput.value = targetEmail;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-      }
-    }
 
     function copyTargetPhone() {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1110,47 +1190,11 @@
       }
     }
 
-    const copyEmailTag = document.getElementById('copyEmailTag');
-    if (copyEmailTag) {
-      copyEmailTag.addEventListener('click', () => {
-        copyTargetEmail();
-        showToast('📋 sudheerfy@gmail.com copy ho gaya!');
-      });
-    }
-
     const copyPhoneTag = document.getElementById('copyPhoneTag');
     if (copyPhoneTag) {
       copyPhoneTag.addEventListener('click', () => {
         copyTargetPhone();
         showToast('📋 9918804121 copy ho gaya!');
-      });
-    }
-
-    // Stop background music immediately & Launch Google Meet calling
-    const meetCallBtn = document.getElementById('googleMeetCallBtn');
-    if (meetCallBtn) {
-      meetCallBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        pauseAudio(); // Stop romantic song immediately so call audio is crystal clear
-        copyTargetEmail();
-        showToast('📋 sudheerfy@gmail.com copy ho gaya! Meet khul raha hai...');
-
-        // Launch Google Meet (package: com.google.android.apps.tachyon for Meet Calling / Duo)
-        if (/Android/i.test(navigator.userAgent)) {
-          // Intent to open Google Meet calling app directly
-          window.location.href = 'intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.apps.tachyon;end';
-
-          setTimeout(() => {
-            window.location.href = 'intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.apps.meetings;end';
-          }, 1200);
-
-          setTimeout(() => {
-            window.open('https://meet.google.com/', '_blank');
-          }, 2200);
-        } else {
-          // iOS or Desktop Browser
-          window.open('https://meet.google.com/', '_blank');
-        }
       });
     }
 
@@ -1167,6 +1211,59 @@
     const phoneBtn = document.getElementById('phoneCallLink');
     if (phoneBtn) {
       phoneBtn.addEventListener('click', () => {
+        pauseAudio();
+        showToast('📞 Dialing 9918804121...');
+      });
+    }
+
+    /* --------------------------------------------------------------------------
+       DATE CUTOFF LOGIC (After 06 Sep 2026 -> Timeless Romantic Message)
+       -------------------------------------------------------------------------- */
+    // 06 Sep 2026 23:59:59 IST ke baad (yani 07 Sep 2026 00:00:00 se)
+    const cutoffDate = new Date('2026-09-07T00:00:00+05:30');
+    const currentDate = new Date();
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Activates automatically after 06 Sep 2026, or when testing with ?after06sep=true or ?expired=true
+    const isAfter06Sep = (currentDate >= cutoffDate) || urlParams.get('after06sep') === 'true' || urlParams.get('expired') === 'true';
+
+    const postDateSection = document.getElementById('postDateSection');
+    const flowWrapper = document.querySelector('.flow-wrapper');
+    const viewOriginalBtn = document.getElementById('viewOriginalBtn');
+    const copyPhoneTagPost = document.getElementById('copyPhoneTagPost');
+
+    if (isAfter06Sep && postDateSection && flowWrapper) {
+      flowWrapper.style.display = 'none';
+      postDateSection.classList.add('active');
+    }
+
+    if (viewOriginalBtn && flowWrapper && postDateSection) {
+      viewOriginalBtn.addEventListener('click', () => {
+        flowWrapper.style.display = 'flex';
+        postDateSection.style.display = 'none';
+        flowWrapper.scrollIntoView({ behavior: 'smooth' });
+        showToast('💌 6 सितंबर का मूल संदेश लोड हो गया ❤️');
+      });
+    }
+
+    if (copyPhoneTagPost) {
+      copyPhoneTagPost.addEventListener('click', () => {
+        copyTargetPhone();
+        showToast('📋 9918804121 copy ho gaya!');
+      });
+    }
+
+    const waPostBtn = document.getElementById('waPostBtn');
+    if (waPostBtn) {
+      waPostBtn.addEventListener('click', () => {
+        pauseAudio();
+        showToast('💬 WhatsApp open ho raha hai (9918804121)...');
+      });
+    }
+
+    const phonePostBtn = document.getElementById('phonePostBtn');
+    if (phonePostBtn) {
+      phonePostBtn.addEventListener('click', () => {
         pauseAudio();
         showToast('📞 Dialing 9918804121...');
       });
